@@ -6,8 +6,7 @@ import { AppComponent } from './app.component';
 import {AngularFireModule} from '@angular/fire';
 import {environment} from '../environments/environment';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {FlexLayoutModule} from '@angular/flex-layout';
-import { HomepageComponent } from './home/homepage/homepage.component';
+
 
 @NgModule({
   declarations: [

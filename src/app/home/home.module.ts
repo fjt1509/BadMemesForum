@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { HomeRoutingModule } from './home-routing.module';
 import {HomepageComponent} from './homepage/homepage.component';
 import {FlexLayoutModule} from '@angular/flex-layout';
+import {MzButtonModule, MzCardModule, MzParallaxModule} from 'ngx-materialize';
 
 @NgModule({
   declarations: [
@@ -12,7 +13,13 @@ import {FlexLayoutModule} from '@angular/flex-layout';
   imports: [
     CommonModule,
     HomeRoutingModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    MzButtonModule,
+    MzCardModule,
+    MzParallaxModule
+
+
+
   ]
 })
 export class HomeModule { }
