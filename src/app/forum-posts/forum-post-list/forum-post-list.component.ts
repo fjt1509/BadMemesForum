@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {animate, state, style, transition, trigger} from '@angular/animations';
+import {ForumPostService} from '../shared/forum-post.service';
+import {Observable} from 'rxjs';
+import {Post} from '../shared/post.model';
 
 @Component({
   selector: 'app-forum-post-list',
@@ -22,9 +25,21 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
 })
 export class ForumPostListComponent implements OnInit {
 
-  constructor() { }
+  postList: Observable<Post[]>;
+
+  constructor(private postService: ForumPostService) { }
 
   ngOnInit() {
+    this.postList = this.postService.getForumPosts();
   }
+
+  convertTime(postTime: any) {
+    const date = postTime.toDate();
+    const dateString = date.toLocaleDateString();
+
+    return 'Date: ' + dateString;
+
+  }
+
 
 }

@@ -5,7 +5,7 @@ import { ForumPostsRoutingModule } from './forum-posts-routing.module';
 import { ForumPostDetailsComponent } from './forum-post-details/forum-post-details.component';
 import {ForumPostListComponent} from './forum-post-list/forum-post-list.component';
 import {FlexLayoutModule} from '@angular/flex-layout';
-import {MzButtonModule, MzCardModule, MzIconMdiModule, MzIconModule, MzInputModule} from 'ngx-materialize';
+import {MzButtonModule, MzCardModule, MzIconMdiModule, MzIconModule, MzInputModule, MzSpinnerModule} from 'ngx-materialize';
 import { ForumPostAddComponent } from './forum-post-add/forum-post-add.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
@@ -23,7 +23,8 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     MzIconMdiModule,
     MzInputModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    MzSpinnerModule
   ]
 })
 export class ForumPostsModule { }
