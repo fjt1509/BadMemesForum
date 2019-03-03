@@ -1,4 +1,4 @@
-<div class="container" *ngIf="post">
+<div class="container" *ngIf="post | async as post">
   <div fxLayout="row" fxLayoutAlign="center center" >
   <mz-card  style="width: 100%; margin-top: 3%" [@simpleFadeAnimation]>
     <mz-card-title style="text-align: center">
@@ -9,34 +9,45 @@
     <mz-card-content style="text-align: center">
       <p style="margin-top: 2%; font-size: large">{{post.postDescription}}</p>
     </mz-card-content>
-    <mz-card-action fxLayout="column" fxLayoutAlign="center center">
-      <button mz-button class="blue darken-3" (click)="createComment = true">ADD COMMENT</button>
+    <mz-card-action fxLayout="column" fxLayoutAlign="center center" [@simpleFadeAnimation]>
+      <mz-spinner *ngIf="imageLoad">
 
-      <div fxLayout="row" fxLayoutAlign="space-evenly center" *ngIf="createComment" >
-        <form [formGroup]="commentForm" (ngSubmit)="onSubmit()">
-          <mz-input-container style="width: 200px">
-            <input mz-input placeholder="Comment" formControlName="comment" required="required" size="40">
-          </mz-input-container>
-          <div fxLayoutAlign="center center">
-          <button mz-button class="red" [float]="true" (click)="createComment = false"><i mz-icon [icon]="'clear'"></i></button>
-          <button mz-button class="green" [float]="true" style="margin-left: 4px"><i mz-icon [icon]="'add'"></i></button>
-          </div>
-        </form>
-
-      </div>
+      </mz-spinner>
+      <img [src]="post.url"  *ngIf="post.url">
     </mz-card-action>
   </mz-card>
   </div>
 </div>
 
 
-<div class="container" *ngIf="post" [@simpleFadeAnimation] style="margin-top: 3%">
-  <div fxLayout="row" fxLayoutAlign="center center" >
-    <mz-card>
-      <mz-card-title  fxLayout="column" fxLayoutAlign="center center">
+
+
+<div class="container" *ngIf="post | async as post"  style="margin-bottom: 3%">
+  <div fxLayout="row" fxLayoutAlign="center center"  >
+    <mz-card style="width: 100%" [@simpleFadeAnimation]>
+      <mz-card-content  fxLayout="row" fxLayoutAlign="space-between  center" >
+        <div fxLayout="row" fxLayoutAlign="center center">
         <h5 class="cardTitle">COMMENTS</h5>
         <i mz-icon [icon]="'arrow_downward'"></i>
-      </mz-card-title>
+        </div>
+        <div>
+          <button mz-button class="blue lighten-1" (click)="createComment = true" [large]="true">ADD COMMENT</button>
+        </div>
+      </mz-card-content>
+      <mz-card-action>
+        <div fxLayout="row" fxLayoutAlign="space-evenly center" *ngIf="createComment" >
+          <form [formGroup]="commentForm" (ngSubmit)="onSubmit()">
+            <mz-input-container style="width: 200px">
+              <input mz-input placeholder="Comment" formControlName="comment" required="required" size="40">
+            </mz-input-container>
+            <div fxLayoutAlign="center center">
+              <button mz-button class="red" [float]="true" (click)="createComment = false"><i mz-icon [icon]="'clear'"></i></button>
+              <button mz-button class="green" [float]="true" style="margin-left: 4px"><i mz-icon [icon]="'add'"></i></button>
+            </div>
+          </form>
+
+        </div>
+      </mz-card-action>
     </mz-card>
   </div>
 
@@ -56,3 +67,5 @@
 
   </div>
 </div>
+
+<div style="margin-bottom: 10%"></div>

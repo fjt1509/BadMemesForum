@@ -5,9 +5,19 @@ import { ForumPostsRoutingModule } from './forum-posts-routing.module';
 import { ForumPostDetailsComponent } from './forum-post-details/forum-post-details.component';
 import {ForumPostListComponent} from './forum-post-list/forum-post-list.component';
 import {FlexLayoutModule} from '@angular/flex-layout';
-import {MzButtonModule, MzCardModule, MzIconMdiModule, MzIconModule, MzInputModule, MzSpinnerModule} from 'ngx-materialize';
+import {
+  MzButtonModule,
+  MzCardModule,
+  MzIconMdiModule,
+  MzIconModule,
+  MzInputModule,
+  MzProgressModule,
+  MzSpinnerModule
+} from 'ngx-materialize';
 import { ForumPostAddComponent } from './forum-post-add/forum-post-add.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {FileMetadataModule} from '../files/file-metadata.module';
+import {ImageCropperModule} from 'ngx-image-cropper';
 
 @NgModule({
   declarations: [ForumPostDetailsComponent,
@@ -24,7 +34,11 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     MzInputModule,
     ReactiveFormsModule,
     FormsModule,
-    MzSpinnerModule
+    MzSpinnerModule,
+    FileMetadataModule,
+    ImageCropperModule,
+    MzProgressModule
+
   ]
 })
 export class ForumPostsModule { }

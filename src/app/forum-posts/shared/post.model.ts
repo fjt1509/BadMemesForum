@@ -4,6 +4,8 @@ export class Post  {
   id?: string;
   postName: string;
   postDescription: string;
-  postTime: Date;
+  postTime?: Date;
   comments?: Comment[];
+  pictureId?: string;
+  url?: string;
 }

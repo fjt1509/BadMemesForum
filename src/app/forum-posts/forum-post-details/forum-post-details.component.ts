@@ -5,6 +5,8 @@ import {ForumPostService} from '../shared/forum-post.service';
 import {Post} from '../shared/post.model';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import {FormControl, FormGroup} from '@angular/forms';
+import {tap} from 'rxjs/operators';
+import {FileService} from '../../files/shared/file.service';
 
 @Component({
   selector: 'app-forum-post-details',
@@ -28,20 +30,29 @@ import {FormControl, FormGroup} from '@angular/forms';
 export class ForumPostDetailsComponent implements OnInit {
 
   postId: string;
-  post: Post;
+  post: Observable<any>;
   comments: Observable<any[]>;
   commentForm = new FormGroup( {
     comment: new FormControl('')
-  })
+  });
   createComment: boolean;
+  imageLoad: boolean;
 
-  constructor(private router: Router, private postService: ForumPostService) { }
+  constructor(private router: Router, private postService: ForumPostService, private fileService: FileService) { }
 
   ngOnInit() {
     const uri = this.router.url;
     this.postId = uri.substr(uri.lastIndexOf('/') + 1);
 
-    this.postService.getForumPostById(this.postId).subscribe(postReturn => this.post = postReturn);
+    this.post = this.postService.getForumPostById(this.postId).pipe(tap(postRef => {
+      if (postRef.pictureId) {
+        this.imageLoad = true;
+        this.fileService.getFileUrl(postRef.pictureId).subscribe( url => {postRef.url = url; this.imageLoad = false; });
+      }
+      console.log(postRef);
+    }));
+
+
     this.comments = this.postService.getForumPostWithComments(this.postId);
     this.createComment = false;
 
@@ -67,6 +78,6 @@ export class ForumPostDetailsComponent implements OnInit {
     const date = new Date();
     const comment = this.commentForm.value;
 
-    this.postService.addComment(this.postId, comment.comment, date).then( () => this.createComment = false);
+    this.postService.addComment(this.postId, comment.comment, date).then( () => {this.createComment = false; this.commentForm.reset(); });
   }
 }
