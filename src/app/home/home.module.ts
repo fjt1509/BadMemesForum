@@ -17,9 +17,6 @@ import {MzButtonModule, MzCardModule, MzParallaxModule} from 'ngx-materialize';
     MzButtonModule,
     MzCardModule,
     MzParallaxModule
-
-
-
   ]
 })
 export class HomeModule { }
